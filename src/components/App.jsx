@@ -34,16 +34,6 @@ export class App extends React.Component {
     if (this.state.page !== prevState.page) this.loadMore();
   }
 
-  // async componentDidMount() {
-  //   try {
-  //     this.setState({ isLoading: true });
-  //     const posts = await fetchPosts(this.state.query, this.state.page);
-  //     this.setState({ posts });
-  //   } catch (error) {
-  //   } finally {
-  //     this.setState({ isLoading: false });
-  //   }
-  // }
   fetchPosts = async () => {
     try {
       this.setState({ isLoading: true });
@@ -83,7 +73,6 @@ export class App extends React.Component {
       this.setState(prevState => ({
         posts: [...prevState.posts, ...posts.hits],
         showLoadMore: posts.totalHits / this.state.page > 12,
-        // page: prevState + 1,
       }));
     } catch (error) {
       toast.error(`Oops, some error occured ${error.message}`);
@@ -109,9 +98,6 @@ export class App extends React.Component {
   };
 
   render() {
-    // const { images, isLoading } = this.state;
-
-    // console.log(this.state.modal.visibleData?.largeImageURL);
     return (
       <div>
         {this.state.modal.isOpen && (
@@ -129,10 +115,6 @@ export class App extends React.Component {
 
         {this.state.showLoadMore && <Button onClick={this.incrementPage} />}
 
-        {/* {this.state.posts.length > 0 &&
-          this.state.posts.map(posts => {
-            return <div key={posts.id}>{posts.webformatURL}</div>;
-          })} */}
         <ToastContainer
           position="top-right"
           autoClose={2500}
